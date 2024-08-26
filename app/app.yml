@@ -1,0 +1,23 @@
+version: "3.3"
+services:
+
+  nginx_test:
+    image: nginx
+    labels:
+      # Router para manejar tanto www.mydomain.org como mydomain.org
+      - "traefik.enable=true"
+      - "traefik.http.routers.nginx.rule=Host(`mydomain.org`) || Host(`www.mydomain.org`)"
+      - "traefik.http.routers.nginx.entrypoints=websecure"
+      - "traefik.http.routers.nginx.tls=true"
+      - "traefik.http.routers.nginx.tls.certresolver=myresolver"
+
+      # Middleware para redirigir de mydomain.org a www.mydomain.org
+      - "traefik.http.middlewares.redirect-to-www.redirectregex.regex=^https?://mydomain.org/(.*)"
+      - "traefik.http.middlewares.redirect-to-www.redirectregex.replacement=https://www.mydomain.org/$1"
+      - "traefik.http.routers.nginx.middlewares=redirect-to-www"
+    networks:
+      - traefik-net
+      
+networks:
+  traefik-net:
+    external: true
