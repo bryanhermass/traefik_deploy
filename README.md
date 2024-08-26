@@ -40,7 +40,7 @@ En Route 53, creamos un registro con nuestro dominio o subdominio que apunte a l
 
 Modificamos el archivo `terraform/ec2.tf` con los siguientes parámetros:
 
-```hcl
+
 locals {
     instance_type    = "t2.micro" # Tipo de instancia
     ami              = "ami-0e001c9271cf7f3b9" # Imagen Ubuntu 20.04
@@ -51,11 +51,11 @@ locals {
     pem_route        = "~/git/pems/traefik_example.pem" # Ruta de la clave privada (key PEM)
 }
 
-### 6. Proveedor de AWS
+### 5. Configurar Terraform
 
 Agregamos nuestras credenciales AWS al archivo o las configuramos como variables de entorno para mayor seguridad:
 
-```hcl
+
 provider "aws" {
     region     = "us-east-1"
     access_key = "LFUXXXXXXXXXXXXXXXXXXXXXX"
@@ -66,7 +66,7 @@ provider "aws" {
 
 Editamos el archivo certificado/docker-compose.yml y cambiamos el correo por uno personal, ya que Let's Encrypt enviará notificaciones a esa dirección:
 
-```yml
+
 - "--certificatesresolvers.myresolver.acme.email=my_correo@gmail.com"
 
 
