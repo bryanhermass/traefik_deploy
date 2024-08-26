@@ -40,7 +40,7 @@ En Route 53, creamos un registro con nuestro dominio o subdominio que apunte a l
 
 Modificamos el archivo `terraform/ec2.tf` con los siguientes parámetros:
 
-
+```
 locals {
     instance_type    = "t2.micro" # Tipo de instancia
     ami              = "ami-0e001c9271cf7f3b9" # Imagen Ubuntu 20.04
@@ -50,30 +50,34 @@ locals {
     allocation_id    = "eipalloc-07XXXXXXXXX" # ID de la Elastic IP creada
     pem_route        = "~/git/pems/traefik_example.pem" # Ruta de la clave privada (key PEM)
 }
+```
 
 ### 5. Configurar Terraform
 
 Agregamos nuestras credenciales AWS al archivo o las configuramos como variables de entorno para mayor seguridad:
 
-
+```
 provider "aws" {
     region     = "us-east-1"
     access_key = "LFUXXXXXXXXXXXXXXXXXXXXXX"
     secret_key = "+ETdXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 }
+```
 
 ### 7. Configurar Let's Encrypt
 
 Editamos el archivo certificado/docker-compose.yml y cambiamos el correo por uno personal, ya que Let's Encrypt enviará notificaciones a esa dirección:
 
-
+```
 - "--certificatesresolvers.myresolver.acme.email=my_correo@gmail.com"
+```
 
 
 ### 8. Configurar el Servicio con NGINX
 
 En el archivo app/app.yml, configuramos nuestro servicio. En este caso, utilizamos una imagen de NGINX con una serie de reglas para que Traefik las pueda leer:
 
+```
 version: "3.3"
 services:
 
@@ -97,6 +101,7 @@ services:
 networks:
   traefik-net:
     external: true
+```
 
 Recuerda cambiar www.mydomain.org y mydomain.org por tu dominio. La primera regla indica que, si llega una solicitud desde www.mydomain.org o mydomain.org, este servicio será el que responda. La segunda regla asegura que cualquier solicitud a mydomain.org se redirigirá automáticamente a www.mydomain.org.
 
@@ -112,8 +117,12 @@ Esto comenzará a crear toda la infraestructura, instalar y configurar Docker en
 
 Accedemos a nuestro servidor vía SSH y desplegamos los servicios:
 
+```
 sudo docker compose up -d
+```
+```
 docker compose -f app.yml up -d
+```
 
 ### 11. Acceso al Servicio
 
