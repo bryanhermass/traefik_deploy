@@ -12,7 +12,7 @@ services:
       - "--providers.docker.exposedbydefault=false"
       - "--entryPoints.websecure.address=:443"
       - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
-      - "--certificatesresolvers.myresolver.acme.email=bryanhermass@gmail.com"
+      - "--certificatesresolvers.myresolver.acme.email=my_correo@gmail.com"
       - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
 
       - "--entrypoints.web.address=:80"

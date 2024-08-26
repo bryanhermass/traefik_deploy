@@ -1,4 +1,4 @@
-# Despliegue de Servicio con Traefik y Certificados TLS/SSL
+# Despliegue de Servicio con Traefik y Certificado TLS
 
 Con esta documentación, deberías poder desplegar tu servicio con un proxy reverso muy potente (Traefik) y, además, con un certificado TLS/SSL auto-renovable utilizando Let's Encrypt.
 
