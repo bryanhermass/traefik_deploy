@@ -32,9 +32,10 @@ Creamos una Elastic IP, una IP pública fija que va a usar nuestra instancia EC2
 
 ### 4. Configurar Route 53
 
-En Route 53, creamos un registro con nuestro dominio o subdominio que apunte a la Elastic IP que acabamos de crear.
+En Route 53, creamos 2 registro con nuestros dominio o subdominios apuntando a la Elastic IP que acabamos de crear.
 
-![FOTO]
+![ROUTE_1] (images/route1.png)
+![ROUTE_2] (images/route2.png)
 
 ### 5. Configurar Terraform
 
