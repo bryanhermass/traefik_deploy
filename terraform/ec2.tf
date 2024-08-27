@@ -4,7 +4,7 @@ locals {
     key_pem_name = "traefik_example" 
     security_groups = ["sg-XXXXXXXXXXX"] 
     subnet_id = "subnet-XXXXXXXXXX" 
-    allocation_id = "eipalloc-075b24302911ba3f4"
+    allocation_id = "eipalloc-XXXXXXXXXXXXXX"
     pem_route = "~/git/pems/traefik_example.pem" 
 }
 
