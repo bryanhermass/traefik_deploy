@@ -1,8 +1,8 @@
 # Despliegue de Servicio con Traefik y Certificado TLS
 
-Con esta documentación, deberías poder deployar tu servicio con un proxy reverso muy potente (Traefik) y, además con certificado TLS auto-renovable utilizando Let's Encrypt.
+Con esta documentación, deberías poder deployar tu servicio con un proxy muy potente (Traefik) y, además con certificado TLS auto-renovable utilizando Let's Encrypt.
 
-Este proyecto está implementado en AWS, pero puede ser migrado a cualquier proveedor de nube siguiendo la misma lógica. Si no estás familiarizado, puedes crearte una cuenta de AWS gratis.
+Este proyecto está implementado en AWS, pero puede ser migrado a cualquier proveedor de nube siguiendo la misma lógica. Si no estás familiarizado, puedes crearte una cuenta de AWS.
 
 El proyecto se deploya con Terraform, lo cual facilita la implementación rápida de todos los recursos y la instalación/configuración de las dependencias. Es totalmente customizable y mejorable para tu proyecto.
 
