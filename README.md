@@ -1,4 +1,4 @@
-# Despliegue de Servicio con Traefik y Certificado TLS
+# Despliegue de Servicio con Traefik y Certificado TLS Utilizando docker
 
 Con esta documentación, deberías poder deployar tu servicio con un proxy muy potente (Traefik) y, además con certificado TLS auto-renovable utilizando Let's Encrypt.
 
@@ -8,7 +8,7 @@ El proyecto se deploya con Terraform, lo cual facilita la implementación rápid
 
 ## Requisitos
 
-1. Tener un dominio propio. Puedes comprarlo aca : https://www.namecheap.com/
+1. Tener un dominio propio. Puedes comprarlo acá : https://www.namecheap.com/
 2. Instalar Terraform en tu máquina local. https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli
 3. tener un access key para tu usuario tipo Command Line Interface (CLI)
  
@@ -105,7 +105,7 @@ networks:
     external: true
 ```
 
-Recuerda cambiar www.mydomain.org y mydomain.org por tu dominio. La primera regla indica que, si llega una solicitud desde www.mydomain.org o mydomain.org, este servicio será el que responda. La segunda regla asegura que cualquier solicitud a mydomain.org se redirigirá automáticamente a www.mydomain.org.
+Recuerda cambiar www.mydomain.org y mydomain.org por tu dominio. La primera regla indica que, si llega una solicitud desde www.mydomain.org o mydomain.org, Traefik va a enviar el tráfico para este servicio. La segunda regla asegura que cualquier solicitud a mydomain.org se redirigirá automáticamente a www.mydomain.org.
 
 ### 9. Deployar la Infraestructura con Terraform
 
