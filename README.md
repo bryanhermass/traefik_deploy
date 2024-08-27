@@ -10,7 +10,8 @@ El proyecto se deploya con Terraform, lo cual facilita la implementación rápid
 
 1. Tener un dominio propio. Puedes comprarlo aca : https://www.namecheap.com/
 2. Instalar Terraform en tu máquina local. https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli
-
+3. tener un access key para tu usuario tipo Command Line Interface (CLI)
+ 
 ## Pasos
 
 ### 1. Crear una clave PEM
@@ -110,7 +111,12 @@ Recuerda cambiar www.mydomain.org y mydomain.org por tu dominio. La primera regl
 
 Desde la terminal, ingresamos a la carpeta de Terraform y ejecutamos el siguiente comando:
 
+```
+terraform init
+```
+```
 terraform apply
+```
 
 Esto comenzará a crear toda la infraestructura, instalar y configurar Docker en nuestra instancia, ademas enviar los archivos de Docker que vamos a deployar.
 

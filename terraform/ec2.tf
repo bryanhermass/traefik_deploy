@@ -1,16 +1,17 @@
 locals {
     instance_type = "t2.micro" 
     ami = "ami-0e001c9271cf7f3b9" #(Ubuntu 20.04)
-    key_pem_name = "docker" 
-    security_groups = ["sg-0cb30a03c83bfb281"] 
-    subnet_id = "subnet-05743d3bc4c8320a4" 
-    pem_route = "~/git/pems/docker.pem" 
+    key_pem_name = "traefik_example" 
+    security_groups = ["sg-XXXXXXXXXXX"] 
+    subnet_id = "subnet-XXXXXXXXXX" 
+    allocation_id = "eipalloc-075b24302911ba3f4"
+    pem_route = "~/git/pems/traefik_example.pem" 
 }
 
 provider "aws" {
     region     = "us-east-1"
-    access_key = "AKIAQ3EGRJM6CX6JNW6D"
-    secret_key = "+SBdrIq3Rm2ruNq2jkAK8Pw7Nqdc+KEpK0/wxnar"
+    access_key = "XXXXXXXXXXXXXXXXXXX"
+    secret_key = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 }
 
 resource "aws_instance" "Docker-Services" {
@@ -28,7 +29,7 @@ resource "aws_instance" "Docker-Services" {
 
 resource "aws_eip_association" "eip_assoc" {
     instance_id   = aws_instance.Docker-Services.id
-    allocation_id = "eipalloc-075b24302911ba3f4"
+    allocation_id = local.allocation_id
     depends_on = [ aws_instance.Docker-Services ]
 }
 
