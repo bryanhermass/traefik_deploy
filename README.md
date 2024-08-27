@@ -1,21 +1,21 @@
 # Despliegue de Servicio con Traefik y Certificado TLS
 
-Con esta documentación, deberías poder desplegar tu servicio con un proxy reverso muy potente (Traefik) y, además, con un certificado TLS/SSL auto-renovable utilizando Let's Encrypt.
+Con esta documentación, deberías poder deployar tu servicio con un proxy reverso muy potente (Traefik) y, además con certificado TLS auto-renovable utilizando Let's Encrypt.
 
-Este proyecto está implementado en AWS, pero puede ser migrado a cualquier proveedor de nube siguiendo la misma lógica. Si no estás familiarizado, puedes crearte una cuenta de AWS Free Tier.
+Este proyecto está implementado en AWS, pero puede ser migrado a cualquier proveedor de nube siguiendo la misma lógica. Si no estás familiarizado, puedes crearte una cuenta de AWS gratis.
 
-El proyecto se despliega con Terraform, lo cual facilita la implementación rápida de todos los recursos y la instalación/configuración de las dependencias.
+El proyecto se deploya con Terraform, lo cual facilita la implementación rápida de todos los recursos y la instalación/configuración de las dependencias. Es totalmente customizable y mejorable para tu proyecto.
 
 ## Requisitos
 
-1. Tener un dominio propio.
-2. Instalar Terraform en tu máquina local.
+1. Tener un dominio propio. Puedes comprarlo aca : https://www.namecheap.com/
+2. Instalar Terraform en tu máquina local. https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli
 
 ## Pasos
 
 ### 1. Crear una clave PEM
 
-Iniciamos sesión en nuestra cuenta de AWS y creamos una clave PEM. Descargamos el archivo.
+Iniciamos sesión en nuestra cuenta de AWS y creamos una llave PEM. Descargamos el archivo.
 
 ### 2. Configurar un Security Group
 
@@ -24,7 +24,7 @@ Creamos un security group en la VPC que vamos a utilizar en este proyecto y habi
 - **8080**: Solo para tu IP pública, ya que este puerto lo utiliza Traefik para acceder al dashboard.
 - **SSH**: Para acceder a la instancia solo desde tu IP pública.
 
-![FOTO]
+![SG](images/sg.png)
 
 ### 3. Crear una Elastic IP
 
@@ -46,16 +46,16 @@ locals {
     instance_type    = "t2.micro" # Tipo de instancia
     ami              = "ami-0e001c9271cf7f3b9" # Imagen Ubuntu 20.04
     key_pem_name     = "traefik_example" # Nombre de la clave PEM creada
-    security_groups  = ["sg-xxxxxx"] # Security group creado en la VPC
-    subnet_id        = "subnet-xxxxxxx" # ID de la subred donde se va a crear la instancia (misma VPC que el security group)
+    security_groups  = ["sg-xxxxxx"] # Security group creado en la VPC que vamos a utilizar
+    subnet_id        = "subnet-xxxxxxx" # ID de la subred donde se va a crear la instancia (misma VPC donde se creo el security group)
     allocation_id    = "eipalloc-07XXXXXXXXX" # ID de la Elastic IP creada
-    pem_route        = "~/git/pems/traefik_example.pem" # Ruta de la clave privada (key PEM)
+    pem_route        = "~/git/pems/traefik_example.pem" # Ruta de la llave privada (key PEM)
 }
 ```
 
 ### 5. Configurar Terraform
 
-Agregamos nuestras credenciales AWS al archivo o las configuramos como variables de entorno para mayor seguridad:
+Agregamos nuestras credenciales de AWS Cli al archivo o las configuramos como variables de entorno para mayor seguridad:
 
 ```
 provider "aws" {
@@ -106,17 +106,17 @@ networks:
 
 Recuerda cambiar www.mydomain.org y mydomain.org por tu dominio. La primera regla indica que, si llega una solicitud desde www.mydomain.org o mydomain.org, este servicio será el que responda. La segunda regla asegura que cualquier solicitud a mydomain.org se redirigirá automáticamente a www.mydomain.org.
 
-### 9. Desplegar la Infraestructura con Terraform
+### 9. Deployar la Infraestructura con Terraform
 
 Desde la terminal, ingresamos a la carpeta de Terraform y ejecutamos el siguiente comando:
 
 terraform apply
 
-Esto comenzará a crear toda la infraestructura, instalar y configurar Docker en nuestra instancia, y enviar los archivos de Docker que vamos a desplegar.
+Esto comenzará a crear toda la infraestructura, instalar y configurar Docker en nuestra instancia, ademas enviar los archivos de Docker que vamos a deployar.
 
 ### 10. Desplegar los Servicios
 
-Accedemos a nuestro servidor vía SSH y desplegamos los servicios:
+Accedemos a nuestro servidor vía SSH y deployamos los servicios:
 
 ```
 sudo docker compose up -d
@@ -129,4 +129,7 @@ docker compose -f app.yml up -d
 
 Ahora ya puedes acceder a tu servicio desde tu dominio.
 
+si guieres ingresar al dasboard de traefik debe usar esta ruta : 
+
+http://INSTANCE_PUBLIc_IP:8080/dashboard/
 
