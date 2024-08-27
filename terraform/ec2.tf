@@ -48,12 +48,12 @@ resource "null_resource" "post_setup" {
     }
 
     provisioner "file" {
-        source      = "/Users/brian/git/trefik/certificado/docker-compose.yml"
+        source      = "/git/trefik/certificado/docker-compose.yml"
         destination = "/home/ubuntu/docker-compose.yml"
     }
 
     provisioner "file" {
-        source      = "/Users/brian/git/trefik/app/app.yml"
+        source      = "/git/trefik/app/app.yml"
         destination = "/home/ubuntu/app.yml"
     }
 
